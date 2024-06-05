@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forms</title>
+<style>
+  .form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .form-container > div {
+    margin-bottom: 20px;
+  }
+  .form-container label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  .form-container input[type="text"],
+  .form-container input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  .address-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .address-container h2 {
+    margin-right: 10px;
+  }
+  .address-container button {
+    padding: 5px;
+    font-size: 18px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .address-box {
+    margin-bottom: 10px;
+  }
+  .default-container {
+    display: flex;
+    align-items: center;
+  }
+  .default-container input[type="radio"] {
+    margin-right: 5px;
+  }
+</style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Form</h1>
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div>
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" required>
+    </div>
+    <div class="address-container">
+      <h2>Addresses</h2>
+      <button type="button" onclick="addAddress()">+</button>
+    </div>
+    <div id="address-fields">
+      <div class="address-box">
+        <label for="street1">Street:</label>
+        <input type="text" id="street1" name="street1" required>
+      </div>
+      <div class="address-box">
+        <label for="city1">City:</label>
+        <input type="text" id="city1" name="city1" required>
+      </div>
+      <div class="address-box">
+        <label for="country1">Country:</label>
+        <input type="text" id="country1" name="country1" required>
+      </div>
+      <div class="address-box">
+        <div class="default-container">
+          <label for="default1">Default:</label>
+          <input type="radio" id="default1" name="default" value="1">
+        </div>
+      </div>
+    </div>
+    <button type="submit">Submit</button>
+  </div>
+
+  <script>
+    let addressCount = 1;
+
+    function addAddress() {
+      if (addressCount < 5) {
+        addressCount++;
+        const container = document.getElementById('address-fields');
+        const div = document.createElement('div');
+        div.classList.add('address-box');
+        div.innerHTML = `
+          <label for="street${addressCount}">Street:</label>
+          <input type="text" id="street${addressCount}" name="street${addressCount}" required><br>
+          <label for="city${addressCount}">City:</label>
+          <input type="text" id="city${addressCount}" name="city${addressCount}" required><br>
+          <label for="country${addressCount}">Country:</label>
+          <input type="text" id="country${addressCount}" name="country${addressCount}" required><br>
+          <div class="default-container">
+            <label for="default${addressCount}">Default:</label>
+            <input type="radio" id="default${addressCount}" name="default" value="${addressCount}"><br>
+          </div>
+        `;
+        container.appendChild(div);
+      } else {
+        alert('You can only add up to 5 addresses.');
+      }
+    }
+  </script>
+</body>
+</html>
